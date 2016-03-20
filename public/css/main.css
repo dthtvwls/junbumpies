@@ -1,0 +1,64 @@
+#chart_container {
+  position: relative;
+  display: inline-block;
+}
+
+#chart {
+  display: inline-block;
+  left: 40px;
+}
+
+.rickshaw_graph .y_ticks {
+  left: 0;
+}
+
+#y_axis {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 40px;
+}
+
+#legend {
+  display: inline-block;
+  vertical-align: top;
+  margin: 0 0 0 60px;
+}
+
+#slider {
+  margin-left: 40px;
+  margin-top: 20px;
+}
+
+#key {
+  margin-left:40px;
+  font-size: 12px;
+}
+
+#timeline {
+  width:900px;
+  margin-left: 40px;
+}
+
+#wrapper {
+  position: relative;
+  width: 1140px;
+  margin:0 auto;
+}
+
+.date {
+  margin-left: 100px;
+}
+
+.detail .item {
+  width: 200px;
+}
+
+.clear {
+  clear:both;
+}
+
+.ui-slider .ui-slider-handle {
+  cursor: pointer;
+  cursor: hand;
+}
