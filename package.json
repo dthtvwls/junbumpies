@@ -1,0 +1,8 @@
+{
+  "private": true,
+  "dependencies": {
+    "express": "^4.13.3",
+    "pg": "^4.5.1",
+    "redis": "^2.5.3"
+  }
+}
