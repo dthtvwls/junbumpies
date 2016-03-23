@@ -20,8 +20,8 @@ http.get({
           pgClient.query('INSERT INTO ranks (entryName, x, y) VALUES ($1, $2, $3);', [
             entry.entryName, x, entry.rank
           ], function (err, result) {
-            console.log(completed);
-            if (++completed >= 26) done();
+            completed++;
+            if (completed >= 26) done();
           });
         });
       }
