@@ -1,6 +1,5 @@
 var http  = require('http'),
-    pg    = require('pg'),
-    redis = require('redis');
+    pg    = require('pg');
 
 http.get({
   host: 'games-ak.espn.go.com',
@@ -9,27 +8,18 @@ http.get({
   var body = '';
   response.on('data', function (data) { body += data; });
   response.on('end', function () {
+    var json = JSON.parse(body),
+        x = Math.floor(json.lastProcessed / 1000),
+        completed = 0;
 
-    var redisClient = redis.createClient(process.env.REDIS_URL);
-    redisClient.get('body', function (err, reply) {
-      if (err) console.log(err);
-      if (body !== reply) {
-        redisClient.set('body', body);
-
-        pg.connect(process.env.DATABASE_URL, function (err, pgClient, done) {
-          if (err) console.log(err);
-          var x = Math.floor(Date.now() / 1000), completed = 0;
-
-          JSON.parse(body).group.entries.forEach(function (entry) {
-            pgClient.query('INSERT INTO ranks (entryName, x, y) VALUES ($1, $2, $3)', [
-              entry.entryName, x, entry.rank
-            ], function (err, result) {
-              if (err) console.log(err);
-              if (++completed === 26) done();
-            });
-          });
+    pg.connect(process.env.DATABASE_URL, function (err, pgClient, done) {
+      json.group.entries.forEach(function (entry) {
+        pgClient.query('INSERT INTO ranks (entryName, x, y) VALUES ($1, $2, $3)', [
+          entry.entryName, x, entry.rank
+        ], function (err, result) {
+          if (++completed === 26) done();
         });
-      }
+      });
     });
   });
 });
