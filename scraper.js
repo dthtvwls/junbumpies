@@ -13,13 +13,17 @@ http.get({
         completed = 0;
 
     pg.connect(process.env.DATABASE_URL, function (err, pgClient, done) {
-      json.group.entries.forEach(function (entry) {
-        pgClient.query('INSERT INTO ranks (entryName, x, y) VALUES ($1, $2, $3)', [
-          entry.entryName, x, entry.rank
-        ], function (err, result) {
-          if (++completed === 26) done();
+      if (err) {
+        console.log(err);
+      } else {
+        json.group.entries.forEach(function (entry) {
+          pgClient.query('INSERT INTO ranks (entryName, x, y) VALUES ($1, $2, $3)', [
+            entry.entryName, x, entry.rank
+          ], function (err, result) {
+            if (++completed === 26) done();
+          });
         });
-      });
+      }
     });
   });
 });
