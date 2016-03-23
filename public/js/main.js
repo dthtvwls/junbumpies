@@ -1,4 +1,4 @@
-$.getJSON('series.json', function (series) {
+$.getJSON('/series.json', function (series) {
 
   var palette = new Rickshaw.Color.Palette();
 
