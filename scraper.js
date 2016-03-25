@@ -8,13 +8,13 @@ http.get({
   var body = '';
   response.on('data', function (data) { body += data; });
   response.on('end', function () {
-    var json = JSON.parse(body),
-        x = Math.floor(json.lastProcessed / 1000),
+    var json      = JSON.parse(body),
+        x         = Math.floor(json.lastProcessed / 1000),
         completed = 0;
 
-    pg.connect(process.env.DATABASE_URL, function (err, pgClient, done) {
+    pg.connect(process.env.DATABASE_URL, function (err, client, done) {
       json.group.entries.forEach(function (entry) {
-        pgClient.query('INSERT INTO ranks (entryName, x, y) VALUES ($1, $2, $3);', [
+        client.query('INSERT INTO ranks (name, x, y) VALUES ($1, $2, $3);', [
           entry.entryName, x, entry.rank
         ], function (err, result) {
           if (++completed === json.group.entries.length) process.exit();

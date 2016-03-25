@@ -1,6 +1,6 @@
 CREATE TABLE ranks (
-  entryName TEXT NOT NULL,
+  name TEXT NOT NULL,
   x INTEGER NOT NULL,
   y INTEGER NOT NULL,
-  PRIMARY KEY(entryName, y)
+  PRIMARY KEY(name, x)
 );
