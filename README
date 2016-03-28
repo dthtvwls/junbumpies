@@ -1,0 +1,9 @@
+The chart is borrowed liberally from http://kenandavis.com/projects/a_season_visualized/ and uses Rickshaw, which uses D3.
+
+The data comes directly from ESPN's json response, sampled every 10 minutes (a unique index on the database prevents
+multiple records from being saved).
+
+The scraper and server are in Node.JS and use PostgreSQL to store data (the schema is in schema.sql)
+
+If you don't node, you can deposit a download of series.json in /public and run `python -m SimpleHTTPServer`,
+`ruby -run -e httpd . -p 8000`, `php -S localhost:8000`, or webserver of your choice using /public as the document root.
